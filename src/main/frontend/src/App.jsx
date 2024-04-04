@@ -4,13 +4,14 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [form, setForm] = useState({uid:'', uname:''});
-  const handleChange = (event) => {
-    const{name, value} = event.target;
-    setForm({ ...form, [name]:value});
-  }
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    axios.get('/rpreact/json')
+    .then(res=>{
+      console.log(res.data);
+      setUsers(res.data)
+    })
+  })
   }
   return (
     <div className="App">

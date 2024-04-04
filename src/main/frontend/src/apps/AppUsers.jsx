@@ -1,14 +1,16 @@
 import { useEffect } from "react";
+import axios from "axios";
+import '../App.css';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [isLoading, SetIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios.get('/rp/react/users')
     .then(res => {
       console.log(res.data);
       setUsers(res.data);
-      SetIsLoading(false);
+      setIsLoading(false);
     })
     .catch(err => {console.log(err);});
   }, []);
@@ -28,12 +30,12 @@ function App() {
           <th>지역</th>
         </tr>
         {
-          users.map(user => (
-          <tr key={user.uid}>
-            <td>{user.uid}</td><td>{user.uname}</td>
-            <td>{user.email}</td><td>{user.regDate}</td>
-            <td>{user.profile}</td><td>{user.github}</td>
-            <td>{user.insta}</td><td>{user.location}</td>
+          users.map(users => (
+          <tr key={users.uid}>
+            <td>{users.uid}</td><td>{users.uname}</td>
+            <td>{users.email}</td><td>{users.regDate}</td>
+            <td>{users.profile}</td><td>{users.github}</td>
+            <td>{users.insta}</td><td>{users.location}</td>
           </tr>
         ))
       } 

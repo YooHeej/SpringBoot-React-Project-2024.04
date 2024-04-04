@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.reactProject.entity.User;
+import com.example.reactProject.entity.Users;
 import com.example.reactProject.service.UserService;
+import com.example.reactProject.service.UsersService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReactController {
 	private final UserService userService;
+	private final UsersService usersService;
 	@GetMapping("/data")
 	public String data() {
 		return "스프링부트에서 보낸 데이터";
@@ -65,4 +68,30 @@ public class ReactController {
 		System.out.println(msg);
 		return msg;
 	}
+	
+	@GetMapping("/users")
+	public String users() {
+		List<Users> list =usersService.getUsersList(1);
+		JSONObject jObj = new JSONObject();
+		JSONArray jArr = new JSONArray();
+		for (Users users:list) {
+			JSONObject jUsers = new JSONObject();
+			jUsers.put("uid", users.getUid());
+			jUsers.put("pwd", users.getPwd());
+			jUsers.put("uname", users.getUname());
+			jUsers.put("email", users.getEmail());
+			jUsers.put("gefDate", users.getRegDate().toString());
+			jUsers.put("isDeleted", users.getIsDeleted());
+			jUsers.put("profile", users.getProfile());
+			jUsers.put("github", users.getGithub());
+			jUsers.put("insta", users.getInsta());
+			jUsers.put("location", users.getLocation());
+			jArr.add(jUsers);
+			
+		}
+		System.out.println(jArr);
+		return jArr.toString();
+			
+	}
+	
 }
