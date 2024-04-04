@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
-import './App.css';
+import '../App.css';
+
 
 function App() {
   const [form, setForm] = useState({uid:'', uname:''});
@@ -11,14 +11,21 @@ function App() {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
+    const params = new URLSearchParams();
+    params.append('uid', form.uid);
+    params.append('uname', form.uname);
+    console.log(params);
+    axios
+      .post('/rp/react/form', params)
+      .then(res => {console.log(res);});
   }
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
       <label htmlFor='uid'>아이디:</label>
-        <input type='text' id='uid' name='uid' value={form.id} onChange={handleChange} /><br />
+        <input type='text' id='uid' name='uid' value={form.uid} onChange={handleChange} /><br />
         <label htmlFor='name'>이름:</label>
-        <input type='text' id='name' name='name' value={form.name} onChange={handleChange} /><br />
+        <input type='text' id='uname' name='uname' value={form.uname} onChange={handleChange} /><br />
         <button>확인</button>
       </form>
     </div>
