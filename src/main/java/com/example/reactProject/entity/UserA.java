@@ -8,22 +8,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
-public class Users {
+
+public class UserA {
 	private String uid;
-	private String pwd;
 	private String uname;
 	private String email;
 	private LocalDate regDate;
-	private int isDeleted;
-	private String profile;
-	private String github;
-	private String insta;
-	private String location;
+
 }

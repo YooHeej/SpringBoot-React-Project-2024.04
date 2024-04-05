@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.reactProject.entity.UserA;
 import com.example.reactProject.entity.User;
-import com.example.reactProject.entity.Users;
+import com.example.reactProject.service.UserAService;
 import com.example.reactProject.service.UserService;
-import com.example.reactProject.service.UsersService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,8 +23,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/react")
 @RequiredArgsConstructor
 public class ReactController {
+//	private final UserAService userService;
 	private final UserService userService;
-	private final UsersService usersService;
 	@GetMapping("/data")
 	public String data() {
 		return "스프링부트에서 보낸 데이터";
@@ -38,23 +38,23 @@ public class ReactController {
 //		return jObj.toString();
 //	}
 	
-	@GetMapping("/json")
-	public String json() {
-		JSONArray jArr = new JSONArray();
-		List<User> userList = userService.getUserList();
-		
-		for(User user : userList) {
-			JSONObject jObj = new JSONObject();	
-			jObj.put("uid", user.getUid());
-			jObj.put("uname", user.getUname());
-			jObj.put("email", user.getEmail());
-			jObj.put("regDate", user.getRegDate());
-			
-			jArr.add(jObj);
-		}
-		
-		return jArr.toJSONString();
-	}
+//	@GetMapping("/json")
+//	public String json() {
+//		JSONArray jArr = new JSONArray();
+//		List<UserA> userList = userService.getUserList();
+//		
+//		for(UserA user : userList) {
+//			JSONObject jObj = new JSONObject();	
+//			jObj.put("uid", user.getUid());
+//			jObj.put("uname", user.getUname());
+//			jObj.put("email", user.getEmail());
+//			jObj.put("regDate", user.getRegDate());
+//			
+//			jArr.add(jObj);
+//		}
+//		
+//		return jArr.toJSONString();
+//	}
 	
 	@PostMapping("/form")
 	public String form(String uid, String uname) {
@@ -71,22 +71,22 @@ public class ReactController {
 	
 	@GetMapping("/users")
 	public String users() {
-		List<Users> list =usersService.getUsersList(1);
+		List<User> list =userService.getUserList(1);
 		JSONObject jObj = new JSONObject();
 		JSONArray jArr = new JSONArray();
-		for (Users users:list) {
-			JSONObject jUsers = new JSONObject();
-			jUsers.put("uid", users.getUid());
-			jUsers.put("pwd", users.getPwd());
-			jUsers.put("uname", users.getUname());
-			jUsers.put("email", users.getEmail());
-			jUsers.put("gefDate", users.getRegDate().toString());
-			jUsers.put("isDeleted", users.getIsDeleted());
-			jUsers.put("profile", users.getProfile());
-			jUsers.put("github", users.getGithub());
-			jUsers.put("insta", users.getInsta());
-			jUsers.put("location", users.getLocation());
-			jArr.add(jUsers);
+		for (User user:list) {
+			JSONObject jUser = new JSONObject();
+			jUser.put("uid", user.getUid());
+			jUser.put("pwd", user.getPwd());
+			jUser.put("uname", user.getUname());
+			jUser.put("email", user.getEmail());
+			jUser.put("regDate", user.getRegDate().toString());
+			jUser.put("isDeleted", user.getIsDeleted());
+			jUser.put("profile", user.getProfile());
+			jUser.put("github", user.getGithub());
+			jUser.put("insta", user.getInsta());
+			jUser.put("location", user.getLocation());
+			jArr.add(jUser);
 			
 		}
 		System.out.println(jArr);

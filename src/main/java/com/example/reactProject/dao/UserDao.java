@@ -9,10 +9,9 @@ import com.example.reactProject.entity.User;
 
 @Mapper
 public interface UserDao {
+
+	@Select("select * from users where isDeleted=0"
+			+ " order by regDate desc limit #{count} offset #{offset}")
+	List<User> getUserList(int count, int offset);
 	
-	@Select("select * from user where uid=#{Uid}")
-	User getUserByuid(String Uid);
-	
-	@Select("select * from user")
-	List<User> getUserList();
 }
