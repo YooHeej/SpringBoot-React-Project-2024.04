@@ -1,28 +1,36 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [usera, setUser] = useState([]);
   useEffect(() => {
-    axios.get('/rpreact/json')
+    axios.get('/rp/react/json')
     .then(res=>{
       console.log(res.data);
-      setUsers(res.data)
+      setUser(res.data)
     })
   })
-  }
+  
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-      <label htmlFor='uid'>아이디:</label>
-        <input type='text' id='uid' name='uid' value={form.id} onChange={handleChange} /><br />
-        <label htmlFor='name'>이름:</label>
-        <input type='text' id='name' name='name' value={form.name} onChange={handleChange} /><br />
-        <button>확인</button>
-      </form>
-    </div>
+    <>
+      <tr>
+        <th>uid</th>
+        <th>uname</th>
+        <th>mail</th>
+        <th>등록일</th>
+      </tr>
+      {
+        usera.map(usera=> (
+          <tr key={usera.uid}>
+            <td>{usera.uid}</td>
+            <td>{usera.uname}</td>
+            <td>{usera.email}</td>
+            <td>{usera.regDate}</td>
+          </tr>
+        ))
+      }
+    </>
   );
 }
 

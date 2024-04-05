@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/react")
 @RequiredArgsConstructor
 public class ReactController {
-//	private final UserAService userService;
+	private final UserAService useraService;
 	private final UserService userService;
 	@GetMapping("/data")
 	public String data() {
@@ -38,23 +38,23 @@ public class ReactController {
 //		return jObj.toString();
 //	}
 	
-//	@GetMapping("/json")
-//	public String json() {
-//		JSONArray jArr = new JSONArray();
-//		List<UserA> userList = userService.getUserList();
-//		
-//		for(UserA user : userList) {
-//			JSONObject jObj = new JSONObject();	
-//			jObj.put("uid", user.getUid());
-//			jObj.put("uname", user.getUname());
-//			jObj.put("email", user.getEmail());
-//			jObj.put("regDate", user.getRegDate());
-//			
-//			jArr.add(jObj);
-//		}
-//		
-//		return jArr.toJSONString();
-//	}
+	@GetMapping("/json")
+	public String json() {
+		JSONArray jArr = new JSONArray();
+		List<UserA> userList = useraService.getUserAList();
+		
+		for(UserA user : userList) {
+			JSONObject jObj = new JSONObject();	
+			jObj.put("uid", user.getUid());
+			jObj.put("uname", user.getUname());
+			jObj.put("email", user.getEmail());
+			jObj.put("regDate", user.getRegDate());
+			
+			jArr.add(jObj);
+		}
+		
+		return jArr.toJSONString();
+	}
 	
 	@PostMapping("/form")
 	public String form(String uid, String uname) {

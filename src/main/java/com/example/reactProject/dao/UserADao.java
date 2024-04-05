@@ -11,8 +11,8 @@ import com.example.reactProject.entity.UserA;
 public interface UserADao {
 	
 	@Select("select * from user where uid=#{Uid}")
-	UserA getUserByuid(String Uid);
+	UserA getUserAByuid(String Uid);
 	
 	@Select("select * from user")
-	List<UserA> getUserList();
+	List<UserA> getUserAList();
 }

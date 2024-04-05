@@ -15,13 +15,13 @@ public class UserAServiceImpl implements UserAService{
 	private final UserADao uDao;
 
 	@Override
-	public UserA getUserByUid(String uid) {
-		return uDao.getUserByuid(uid) ;
+	public UserA getUserAByUid(String uid) {
+		return uDao.getUserAByuid(uid);
 	}
 
 	@Override
-	public List<UserA> getUserList() {
-		return uDao.getUserList();
+	public List<UserA> getUserAList() {
+		return uDao.getUserAList();
 	}
 
 }
